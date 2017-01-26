@@ -7,6 +7,15 @@ $conn = Connection::getConnection();
 
 include('header.html');
 
+$sql = 'SELECT * FROM templog ORDER BY date DESC LIMIT 0,1';
+$item = $conn->query($sql)->fetchObject();
+
+echo '<h2>Aktuální hodnoty</h2>';
+echo '<div class="actual clearfix">';
+echo '<div class="temp big"><span class="icon-temp-3"></span>'.$item->temperature.'°C</div>';
+echo '<div class="hum big"><span class="icon-humidity"></span>'.$item->humidity.'%</div>';
+echo '</div>';
+
 $sql = 'SELECT * FROM templog WHERE date > ADDDATE(NOW(), INTERVAL -72 HOUR) ORDER BY date';
 $items = $conn->query($sql);
 
