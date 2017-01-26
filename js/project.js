@@ -16,26 +16,26 @@ Highcharts.chart('graph', {
         labels: {
             format: '{value}°C',
             style: {
-                color: Highcharts.getOptions().colors[2]
+                color: '#c73301'
             }
         },
         title: {
             text: 'Teplota',
             style: {
-                color: Highcharts.getOptions().colors[2]
+                color: '#c73301'
             }
         }
     }, {
         labels: {
             format: '{value}%',
             style: {
-                color: Highcharts.getOptions().colors[1]
+                color: '#0091dc'
             }
         },
         title: {
             text: 'Vlhkost',
             style: {
-                color: Highcharts.getOptions().colors[1]
+                color: '#0091dc'
             }
         },
         opposite: true
@@ -51,11 +51,13 @@ Highcharts.chart('graph', {
     series: [{
         name: 'Teplota (°C)',
         data: chartData.temp,
-        yAxis: 0
+        yAxis: 0,
+        color: '#c73301'
     }, {
         name: 'Vlhkost (%)',
         data: chartData.humidity,
-        yAxis: 1
+        yAxis: 1,
+        color: '#0091dc'
     }],
     tooltip: {
         shared: true
