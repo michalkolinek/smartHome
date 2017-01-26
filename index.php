@@ -7,7 +7,7 @@ $conn = Connection::getConnection();
 
 include('header.html');
 
-$sql = 'SELECT * FROM templog WHERE date > ADDDATE(NOW(), INTERVAL -72 HOUR) ORDER BY date DESC';
+$sql = 'SELECT * FROM templog WHERE date > ADDDATE(NOW(), INTERVAL -72 HOUR) ORDER BY date';
 $items = $conn->query($sql);
 
 $data = new StdClass();
