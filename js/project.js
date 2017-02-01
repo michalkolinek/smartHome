@@ -71,7 +71,7 @@ Highcharts.chart('graph', {
     tooltip: {
         shared: true,
         formatter: function () {
-            var s = '<b>' + moment(this.x * 1000).format('D.M. LT') + '('+this.x+')</b>';
+            var s = '<b>' + moment(this.x * 1000).format('D.M. LT') + '</b>';
 
                 s += '<br/><span style="color: #c73301;">' + this.points[0].series.name + ': <b>' +
                     this.points[0].y + '</b></span>';
