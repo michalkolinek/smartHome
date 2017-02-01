@@ -1,16 +1,25 @@
 
+moment.locale('cs');
+
 Highcharts.chart('graph', {
     chart: {
-        type: 'spline'
+        type: 'spline',
+        zoomType: 'x'
     },
     title: {
         text: 'Vnitřní teplota'
     },
     subtitle: {
-        text: 'Přesnost +-2°C'
+        text: ''
     },
     xAxis: {
-        categories: chartData.categories
+        categories: chartData.categories,
+        plotBands: chartData.bands,
+        labels: {
+            formatter: function () {
+                return moment(this.value * 1000).format('D.M. LT');
+            }
+        }
     },
     yAxis: [{
         labels: {
@@ -60,6 +69,18 @@ Highcharts.chart('graph', {
         color: '#0091dc'
     }],
     tooltip: {
-        shared: true
-    },
+        shared: true,
+        formatter: function () {
+            var s = '<b>' + moment(this.x * 1000).format('D.M. LT') + '('+this.x+')</b>';
+
+                s += '<br/><span style="color: #c73301;">' + this.points[0].series.name + ': <b>' +
+                    this.points[0].y + '</b></span>';
+
+                s += '<br/><span style="color: #0091dc;">' + this.points[1].series.name + ': <b>' +
+                    this.points[1].y + '</b></span>';
+            
+
+            return s;
+        }
+    }
 });

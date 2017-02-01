@@ -155,6 +155,11 @@ td {
 	margin-right: 20px;
 }
 
+.info {
+	font-style: italic;
+	color: #888;
+}
+
 @media screen and (max-width: 1023px) {
 	.container {
 		padding: 0 12px;
