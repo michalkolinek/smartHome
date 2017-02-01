@@ -98,7 +98,7 @@ class Templog
 		if(!empty($to)) {
 			$where .= ' AND date <= \''.$to.'\'';
 		}
-		$sql = 'SELECT * FROM templog WHERE '.$where;
+		$sql = 'SELECT * FROM templog WHERE '.$where.' ORDER BY date ASC';
 		return SQL::toArray($sql);
 	}
 
