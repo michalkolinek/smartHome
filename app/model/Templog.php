@@ -34,7 +34,7 @@ class Templog
 
 	public function getAggregatedData($from = NULL, $to = NULL)
 	{
-		$span = 12; // 30 minutes
+		$span = 3; // 15 minutes
 		$processed = [];
 
 		$data = $this->getCleanedData($from, $to, 2);
