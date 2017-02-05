@@ -10,7 +10,7 @@ html, body {
 
 body {
 	color: #333E4A;
-	background: #FFF;
+	background: #EEE;
 	font-family: 'Open Sans', sans-serif;
 	font-weight: normal;
 	text-align: center;
@@ -160,8 +160,27 @@ td {
 	color: #888;
 }
 
+.box {
+	padding: 20px;
+	border-radius: 4px;
+	background: #FFF;
+}
+
+.box.location h3 {
+	margin-top: 0;
+}
+
+.location {
+	float: left;
+	margin-right: 20px;
+}
+
 @media screen and (max-width: 1023px) {
 	.container {
 		padding: 0 12px;
+	}
+
+	.box {
+		margin-bottom: 20px;
 	}
 }

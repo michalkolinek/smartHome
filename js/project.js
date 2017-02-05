@@ -7,7 +7,7 @@ Highcharts.chart('graph', {
         zoomType: 'x'
     },
     title: {
-        text: 'Vnitřní teplota'
+        text: 'Doma'
     },
     subtitle: {
         text: ''

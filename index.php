@@ -9,13 +9,36 @@ $conn = Connection::getConnection();
 include('header.html');
 
 $sql = 'SELECT * FROM templog ORDER BY date DESC LIMIT 0,1';
-$item = $conn->query($sql)->fetchObject();
+$in = $conn->query($sql)->fetchObject();
 
+// nasteni venkovnich hodnt z OpenWeatherMap
+$apiKey = '3e250edbdf91f2c4827fb9f4f03d60a2';
+$cityId = '3078610';
+$api = 'http://api.openweathermap.org/data/2.5/weather?id='.$cityId.'&units=metric&APPID='.$apiKey;
+$json = file_get_contents($api);
+$out = json_decode($json);
+
+echo '<section class="clearfix">';
 echo '<h2>Aktuální hodnoty</h2>';
+
+echo '<div class="location box">';
+echo '<h3>Doma</h3>';
 echo '<div class="actual clearfix">';
-echo '<div class="temp big"><span class="icon-temp-3"></span>'.$item->temperature.'°C</div>';
-echo '<div class="hum big"><span class="icon-humidity"></span>'.$item->humidity.'%</div>';
+echo '<div class="temp big"><span class="icon-temp-3"></span>'.$in->temperature.'°C</div>';
+echo '<div class="hum big"><span class="icon-humidity"></span>'.$in->humidity.'%</div>';
 echo '</div>';
+echo '</div>';
+
+echo '<div class="location box">';
+echo '<h3>Venku</h3>';
+echo '<div class="actual clearfix">';
+echo '<div class="temp big"><span class="icon-temp-3"></span>'.$out->main->temp.'°C</div>';
+echo '<div class="hum big"><span class="icon-humidity"></span>'.$out->main->humidity.'%</div>';
+echo '</div>';
+echo '</div>';
+
+echo '</section>';
+
 
 // $sql = 'SELECT * FROM templog WHERE date > ADDDATE(NOW(), INTERVAL -72 HOUR) ORDER BY date';
 // $items = $conn->query($sql);
@@ -38,8 +61,10 @@ foreach($cleanedData->data as $item) {
 }
 
 echo '<h2>Posledních 7 dní</h2>';
-echo '<p class="info">Medián: '.$cleanedData->median.'°C, průměr: '.number_format($cleanedData->avg, 1).'°C, std. odchylka: '.number_format($cleanedData->stdDeviation, 3).'</p>';
+echo '<section class="box history">';
+echo '<p class="info">Medián: '.$cleanedData->median.'°C, průměr: '.number_format($cleanedData->avg, 1).'°C</p>';
 echo '<div id="graph"></div>';
+echo '</section>';
 echo '<script>var chartData = '.json_encode($data).'</script>';
 
 /*
