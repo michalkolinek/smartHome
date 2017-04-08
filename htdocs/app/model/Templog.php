@@ -107,7 +107,7 @@ const DEFAULT_NODE_ID = 2;
 	public function getLastValue($nodeId, $column, $countToAvg = 3)
 	{
 		$conn = Connection::getConnection();
-		$sql = 'SELECT AVG('.$column.') AS value FROM templog WHERE node = '.$nodeId.' ORDER BY date DESC LIMIT 0,'.$countToAvg;
+		$sql = 'SELECT AVG(item.val) FROM (SELECT '.$column.' AS val FROM templog WHERE node = '.$nodeId.' ORDER BY date DESC LIMIT 0,'.$countToAvg.') as item';
 		return SQL::toScalar($sql);
 	}
 
