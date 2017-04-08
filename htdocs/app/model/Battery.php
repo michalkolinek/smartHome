@@ -45,7 +45,7 @@ class Battery
 			$supplyV = number_format($state->value, 2);
 
 			$info = 'Napětí '.$supplyV.'V, '.$state->info;
-			$html = '<div class="battery-status'.($state->level == 'mid' ? ' critical' : '').'" title="'.$info.'">
+			$html = '<div class="battery-status'.($state->level == 'low' ? ' critical' : '').'" title="'.$info.'">
 				<span class="'.$state->icon.'"></span>
 			</div>';
 
