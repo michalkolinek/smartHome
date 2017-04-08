@@ -2,11 +2,6 @@
 
 class Connection 
 {
-	private	$host = 'localhost';
-	private	$user = 'root';
-	private	$pass = '0i549bmK';
-	private	$db = 'logger';
-
 	public static $connection = NULL;
 
 	public static function getConnection() 
