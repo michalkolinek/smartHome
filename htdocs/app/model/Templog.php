@@ -4,6 +4,8 @@ require_once('./app/model/SQL.php');
 
 class Templog
 {
+const DEFAULT_NODE_ID = 2;
+
 	public function getCleanedData($from = NULL, $to = NULL, $sigma = 2)
 	{
 		$data = $this->getRawData($from, $to);
@@ -91,7 +93,7 @@ class Templog
 
 	protected function getRawData($from = NULL, $to = NULL)
 	{
-		$where = '1';
+		$where = ' node = '.self::DEFAULT_NODE_ID;
 		if(!empty($from)) {
 			$where .= ' AND date >= \''.$from.'\'';
 		}
@@ -105,7 +107,7 @@ class Templog
 	public function getLastValue($nodeId, $column, $countToAvg = 3)
 	{
 		$conn = Connection::getConnection();
-		$sql = 'SELECT AVG('.$column.') AS value FROM templog WHERE node = '.$nodeId.' ORDER BY date DESC LIMIT 0,3';
+		$sql = 'SELECT AVG('.$column.') AS value FROM templog WHERE node = '.$nodeId.' ORDER BY date DESC LIMIT 0,'.$countToAvg;
 		return SQL::toScalar($sql);
 	}
 
