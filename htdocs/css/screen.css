@@ -204,6 +204,14 @@ td {
 	.box {
 		margin-bottom: 20px;
 	}
+
+	.actual > div {
+		width: 100%;
+	}
+
+	.actual > div.temp {
+		margin-bottom: 15px;
+	}
 }
 
 @-webkit-keyframes pulsate {
