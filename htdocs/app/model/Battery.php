@@ -55,7 +55,7 @@ class Battery
 	public function getLastValue($nodeId, $countToAvg = 3)
 	{
 		$conn = Connection::getConnection();
-		$sql = 'SELECT AVG(voltage) AS value FROM templog WHERE node = '.$nodeId.' ORDER BY date DESC LIMIT 0,3';
+		$sql = 'SELECT AVG(item.voltage) FROM (SELECT voltage FROM templog WHERE node = '.$nodeId.' ORDER BY date DESC LIMIT 0,'.$countToAvg.') as item';
 		return SQL::toScalar($sql);
 	}
 }
