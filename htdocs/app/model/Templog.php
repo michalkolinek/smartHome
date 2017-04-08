@@ -102,6 +102,13 @@ class Templog
 		return SQL::toArray($sql);
 	}
 
+	public function getLastValue($nodeId, $column, $countToAvg = 3)
+	{
+		$conn = Connection::getConnection();
+		$sql = 'SELECT AVG('.$column.') AS value FROM templog WHERE node = '.$nodeId.' ORDER BY date DESC LIMIT 0,3';
+		return SQL::toScalar($sql);
+	}
+
 	public static function getTemp($item)
 	{
 		return $item->temperature;

@@ -18,9 +18,9 @@ class SQL
 	public static function toScalar($sql)
 	{
 		$conn = Connection::getConnection();
-		$row = $conn->query($sql);
-		if(isset($row[0])) {
-			return $row[0][0];
+		$row = $conn->query($sql)->fetch();
+		if(isset($row)) {
+			return $row[0];
 		} else {
 			return FALSE;
 		}
