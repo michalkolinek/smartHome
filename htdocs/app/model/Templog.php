@@ -4,65 +4,48 @@ require_once('./app/model/SQL.php');
 
 class Templog
 {
-const DEFAULT_NODE_ID = 2;
-
-	public function getCleanedData($from = NULL, $to = NULL, $sigma = 2)
-	{
-		$data = $this->getRawData($from, $to);
-		$temps = array_map('self::getTemp', $data);
-
-		$median = $this->getMedian($temps);
-		$avg = $this->getAverage($temps);
-		$stdDeviation = $this->getStandartDeviation($temps);
-		$sigmas = $stdDeviation * $sigma;
-
-		// $result = [];
-		// for($i = 0; $i < count($data); $i++) {
-		// 	if($i == 0 || $i == count($data) - 1) continue;
-		// 	$temp = $data[$i]->temperature;
-		// 	$prevTemp = $data[$i-1]->temperature;
-		// 	$nextTemp = $data[$i+1]->temperature;
-		// 	if($temp > $prevTemp + $sigmas && $temp > $nextTemp + $sigmas) continue;
-		// 	if($temp < $prevTemp - $sigmas && $temp < $nextTemp - $sigmas) continue;
-		// 	$result[] = $data[$i];
-		// }
-		return (object) [
-			'data' => $data,
-			'median' => $median,
-			'avg' => $avg,
-			'stdDeviation' => $stdDeviation
-		];
-	}
+	const DEFAULT_NODE_IN = 2;
+	const DEFAULT_NODE_OUT = 5;
+	const TIME_SPAN = 30; // 15 minutes
 
 	public function getAggregatedData($from = NULL, $to = NULL)
 	{
-		$span = 3; // 15 minutes
+		$data = $this->getRawData([self::DEFAULT_NODE_IN, self::DEFAULT_NODE_OUT], $from, $to);
+
 		$processed = [];
+		$sumIn = 0;
+		$sumOut = 0;
+		$countIn = 0;
+		$countOut = 0;
+		$start = FALSE;
 
-		$data = $this->getCleanedData($from, $to, 2);
-		$items = $data->data;
-		$items = array_splice($items, count($items % $span));		
-		
+		foreach($data as $i => $item) {
+			if(!$start) {
+				$start = strtotime($item->date);
+			}
+			if($item->node == self::DEFAULT_NODE_IN) {
+				$sumIn += $item->temperature;
+				$countIn++;
+			} else {
+				$sumOut += $item->temperature;
+				$countOut++;
+			}
 
-		$sumT = 0;
-		$sumH = 0;
-		foreach($items as $i => $item) {
-			$sumT += $item->temperature;
-			$sumH += $item->humidity;
-
-			if($i % $span == $span-1) {
+			if(strtotime($item->date) - $start >= self::TIME_SPAN * 60) {
 				$processed[] = (object) [
-					'time' => strtotime($items[$i]->date),
-					'temperature' => $sumT / $span,
-					'humidity' => $sumH / $span
+					'time' => strtotime($item->date),
+					'in' => $countIn ? $sumIn / $countIn : NULL,
+					'out' => $countOut ? $sumOut / $countOut : NULL
 				];
-				$sumT = 0;
-				$sumH = 0;
+				$start = strtotime($item->date);
+				$sumIn = 0;
+				$sumOut = 0;
+				$countIn = 0;
+				$countOut = 0;
 			}			
 		}
 
-		$data->data = $processed;
-		return $data;
+		return $processed;
 	}
 
 	public function getbands($data)
@@ -91,9 +74,9 @@ const DEFAULT_NODE_ID = 2;
 		return $bands;
 	}
 
-	protected function getRawData($from = NULL, $to = NULL)
+	protected function getRawData($nodes = [], $from = NULL, $to = NULL)
 	{
-		$where = ' node = '.self::DEFAULT_NODE_ID;
+		$where = ' node IN ('.join(',', $nodes).')';
 		if(!empty($from)) {
 			$where .= ' AND date >= \''.$from.'\'';
 		}
@@ -109,16 +92,6 @@ const DEFAULT_NODE_ID = 2;
 		$conn = Connection::getConnection();
 		$sql = 'SELECT AVG(item.val) FROM (SELECT '.$column.' AS val FROM templog WHERE node = '.$nodeId.' ORDER BY date DESC LIMIT 0,'.$countToAvg.') as item';
 		return SQL::toScalar($sql);
-	}
-
-	public static function getTemp($item)
-	{
-		return $item->temperature;
-	}
-
-	public static function getHumidity($item)
-	{
-		return $item->humidity;
 	}
 
 	protected function getMedian($items)

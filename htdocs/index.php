@@ -53,24 +53,23 @@ echo '</section>';
 
 $log = new Templog();
 $from = date('Y-m-d h:i:s', strtotime('-7 days'));
-$cleanedData = $log->getAggregatedData($from);
-$bands = $log->getBands($cleanedData->data);
+$items = $log->getAggregatedData($from);
+$bands = $log->getBands($items);
 
 $data = new StdClass();
-$data->temp = [];
-$data->humidity = [];
+$data->in = [];
+$data->out = [];
 $data->categories = [];
 $data->bands = $bands;
 
-foreach($cleanedData->data as $item) {
+foreach($items as $item) {
 	$data->categories[] = $item->time;
-	$data->temp[] = (float) number_format($item->temperature, 1);
-	$data->humidity[] = (float) number_format($item->humidity, 1);
+	$data->in[] = (float) number_format($item->in, 1);
+	$data->out[] = (float) number_format($item->out, 1);
 }
 
 echo '<h2>Posledních 7 dní</h2>';
 echo '<section class="box history">';
-echo '<p class="info">Medián: '.$cleanedData->median.'°C, průměr: '.number_format($cleanedData->avg, 1).'°C</p>';
 echo '<div id="graph"></div>';
 echo '</section>';
 echo '<script>var chartData = '.json_encode($data).'</script>';

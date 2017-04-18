@@ -7,7 +7,7 @@ Highcharts.chart('graph', {
         zoomType: 'x'
     },
     title: {
-        text: 'Doma'
+        text: false
     },
     subtitle: {
         text: ''
@@ -21,7 +21,7 @@ Highcharts.chart('graph', {
             }
         }
     },
-    yAxis: [{
+    yAxis: {
         labels: {
             format: '{value}°C',
             style: {
@@ -34,21 +34,22 @@ Highcharts.chart('graph', {
                 color: '#c73301'
             }
         }
-    }, {
-        labels: {
-            format: '{value}%',
-            style: {
-                color: '#0091dc'
-            }
-        },
-        title: {
-            text: 'Vlhkost',
-            style: {
-                color: '#0091dc'
-            }
-        },
-        opposite: true
-    }],
+    },
+    // , {
+    //     labels: {
+    //         format: '{value}°C',
+    //         style: {
+    //             color: '#0091dc'
+    //         }
+    //     },
+    //     title: {
+    //         text: 'Venku',
+    //         style: {
+    //             color: '#0091dc'
+    //         }
+    //     },
+    //     opposite: true
+    // }],
     plotOptions: {
         line: {
             dataLabels: {
@@ -58,14 +59,14 @@ Highcharts.chart('graph', {
         }
     },
     series: [{
-        name: 'Teplota (°C)',
-        data: chartData.temp,
+        name: 'Uvnitř (°C)',
+        data: chartData.in,
         yAxis: 0,
         color: '#c73301'
     }, {
-        name: 'Vlhkost (%)',
-        data: chartData.humidity,
-        yAxis: 1,
+        name: 'Venku (°C)',
+        data: chartData.out,
+        yAxis: 0,
         color: '#0091dc'
     }],
     tooltip: {
@@ -73,10 +74,10 @@ Highcharts.chart('graph', {
         formatter: function () {
             var s = '<b>' + moment(this.x * 1000).format('D.M. LT') + '</b>';
 
-                s += '<br/><span style="color: #c73301;">' + this.points[0].series.name + ': <b>' +
+                s += '<br/><span style="color: #c73301;">Teplota uvnitř: <b>' +
                     this.points[0].y + '</b></span>';
 
-                s += '<br/><span style="color: #0091dc;">' + this.points[1].series.name + ': <b>' +
+                s += '<br/><span style="color: #0091dc;">Teplota venku: <b>' +
                     this.points[1].y + '</b></span>';
             
 
