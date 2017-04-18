@@ -54,6 +54,12 @@
 .icon-droplet:before {
   content: "\e907";
 }
+.icon-time:before {
+  content: "\e94e";
+}
+.icon-chart:before {
+  content: "\e99b";
+}
 .icon-humidity:before {
   content: "\e908";
 }
@@ -96,6 +102,4 @@
 .icon-temp-0:before {
   content: "\f2cb";
 }
-
-
 

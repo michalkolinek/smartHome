@@ -167,7 +167,8 @@ td {
 }
 
 .box.location h3 {
-	margin-top: 0;
+	margin: 0 0 20px 0;
+	line-height: 100%;
 }
 
 .location {
@@ -176,23 +177,45 @@ td {
 	position: relative;
 }
 
-.location .battery-status {
+.location .info {
 	position: absolute;
 	right: 20px;
 	top: 15px;
-	font-size: 24px;
-	color: #DDD;
-	transition: color 0.5s;
+	font-size: 12px;
+	line-height: 24px;
 }
 
-.location .battery-status.critical {
+.location .info .item {
+	margin-left: 12px;
+	display: inline-block;
+}
+
+.location .info .item,
+.location .info .item [class*=icon] {
+	color: #CCC;
+	transition: color 0.3s;
+}
+
+.location .info .item [class*=icon] {
+	position: relative;
+	top: 1px;
+}
+
+.location .info .item.battery-status [class*=icon] {
+	font-size: 20px;
+	top: 3px;
+	color: #DDD;
+}
+
+.location .battery-status.critical [class*=icon] {
 	color: #c73301;
 	opacity: 1;
 	-webkit-animation: pulsate 1s ease-out;
     -webkit-animation-iteration-count: infinite; 
 }
 
-.location .battery-status:hover {
+.location .info .item:hover,
+.location .info .item:hover [class*=icon] {
 	color: #666;
 }
 

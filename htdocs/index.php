@@ -31,9 +31,13 @@ $battery = new Battery();
 foreach($nodes as $node) {
 	$temp = number_format($log->getLastValue($node->id, 'temperature'), 1);
 	$hum = number_format($log->getLastValue($node->id, 'humidity'), 1);
+	$updated = SQL::toScalar('SELECT MAX(date) FROM templog WHERE node = '.$node->id);
 	echo '<div class="location box">';
 	echo '<h3>'.$node->title.'</h3>';
+	echo '<div class="info">';
+	echo '<span class="item updated" title="naposledy aktualizováno '.date('G:i j.n.Y', strtotime($updated)).'">'.date('G:i', strtotime($updated)).' <span class="icon-time"></span></span>';
 	echo $battery->getStatusIcon($node->id);
+	echo '</div>';
 	echo '<div class="actual clearfix">';
 	echo '<div class="temp big"><span class="icon-temp-3"></span>'.$temp.'°C</div>';
 	echo '<div class="hum big"><span class="icon-humidity"></span>'.$hum.'%</div>';
