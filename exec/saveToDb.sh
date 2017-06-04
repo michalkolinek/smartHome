@@ -10,10 +10,12 @@ $nodeId = $params[0];
 $voltage = $params[1];
 $temperature = $params[2];
 $humidity = $params[3];
+$moisture = $params[4];
+$output = $params[5];
 $date = date('Y-m-d H:i:s');
 
-$sql = 'INSERT INTO templog(node, date, temperature, humidity, voltage) 
-	VALUES('.$nodeId.', "'.$date.'", '.$temperature.', '.$humidity.', '.$voltage.')';
+$sql = 'INSERT INTO templog(node, date, temperature, humidity, moisture, output, voltage)
+	VALUES('.$nodeId.', "'.$date.'", '.$temperature.', '.$humidity.', '.$moisture.', '.$output.', '.$voltage.')';
 
 $connection->query($sql);
 
