@@ -8,16 +8,19 @@ $params = explode(',', $argv[1]);
 
 $nodeId = $params[0];
 $voltage = $params[1];
-$temperature = $params[2];
-$humidity = $params[3];
-$moisture = $params[4];
-$output = $params[5];
+$temperature = $params[2] ? $params[2] : 'NULL';
+$humidity = $params[3] ? $params[3] : 'NULL';
+$moisture = $params[4] ? $params[4] : 'NULL';
+$output = isset($params[5]) ? $params[5] : 'NULL';
 $date = date('Y-m-d H:i:s');
 
 $sql = 'INSERT INTO templog(node, date, temperature, humidity, moisture, output, voltage)
 	VALUES('.$nodeId.', "'.$date.'", '.$temperature.', '.$humidity.', '.$moisture.', '.$output.', '.$voltage.')';
+$result = $connection->query($sql);
 
-$connection->query($sql);
-
-echo 'OK';
+if($result) {
+  echo "OK\n";
+} else {
+  echo "Failed\n";
+}
 exit;
