@@ -24,6 +24,10 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+
+.icon-power:before {
+  content: "\e90b";
+}
 .icon-remove:before {
   content: "\e909";
 }
@@ -47,6 +51,9 @@
 }
 .icon-battery-full:before {
   content: "\e905";
+}
+.icon-power-plug:before {
+  content: "\e90c";
 }
 .icon-water:before {
   content: "\e906";
@@ -102,4 +109,3 @@
 .icon-temp-0:before {
   content: "\f2cb";
 }
-

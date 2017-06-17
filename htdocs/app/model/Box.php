@@ -13,8 +13,8 @@ class Box
 	public static $icons = [
 		'temperature' => 'icon-temp-3',
 		'humidity' => 'icon-humidity',
-		'moisture' => 'icon-moisture',
-		'output' => 'icon-output',
+		'moisture' => 'icon-water',
+		'output' => 'icon-power-plug',
 	];
 
 	public static $cssClasses = [

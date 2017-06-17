@@ -151,6 +151,10 @@ td {
 	margin-right: 12px;
 }
 
+.actual > div .icon-water {
+	font-size: 24px;
+}
+
 .actual > div:first-of-type {
 	margin-right: 20px;
 }
