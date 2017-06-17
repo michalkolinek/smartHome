@@ -53,7 +53,8 @@ class Box
 		echo '<div class="actual clearfix">';
 
 		foreach($this->config->metrics as $metric) {
-			$val = number_format($log->getLastValue($metric->node, $metric->column), 1);
+			$avgCount = isset($metric->avgCount) ? $metric->avgCount : 3;
+			$val = number_format($log->getLastValue($metric->node, $metric->column, $avgCount), 1);
 
 			if($metric->type == self::METRIC_TYPE_BOOL) {
 				$formatedVal = ($val ? 'ON' : 'OFF');
