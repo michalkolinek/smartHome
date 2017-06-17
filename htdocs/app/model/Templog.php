@@ -15,8 +15,10 @@ class Templog
 		$processed = [];
 		$sumIn = 0;
 		$sumOut = 0;
+		$sumMoist = 0;
 		$countIn = 0;
 		$countOut = 0;
+		$countMoist = 0;
 		$start = FALSE;
 
 		foreach($data as $i => $item) {
@@ -29,6 +31,8 @@ class Templog
 			} else {
 				$sumOut += $item->temperature;
 				$countOut++;
+				$sumMoist += $item->moisture;
+				$countMoist++;
 			}
 
 			if(strtotime($item->date) - $start >= self::TIME_SPAN * 60) {
@@ -36,13 +40,16 @@ class Templog
 					'time' => strtotime($item->date),
 					'in' => $countIn ? $sumIn / $countIn : NULL,
 					'out' => $countOut ? $sumOut / $countOut : NULL
+					'moist' => $countMoist ? $sumMoist / $countMoist : NULL
 				];
 				$start = strtotime($item->date);
 				$sumIn = 0;
 				$sumOut = 0;
+				$sumMoist = 0;
 				$countIn = 0;
 				$countOut = 0;
-			}			
+				$countMoist = 0;
+			}
 		}
 
 		return $processed;
@@ -58,7 +65,7 @@ class Templog
 
 			if(!isset($moment['from']) && ($h >= 17 || $h <= 5)) {
 				$moment['from'] = $i;
-			} 
+			}
 
 			if(isset($moment['from']) && ($h == 5 || $i == count($data) - 1)) {
 				$moment['to'] = $i;

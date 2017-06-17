@@ -21,20 +21,37 @@ Highcharts.chart('graph', {
             }
         }
     },
-    yAxis: {
-        labels: {
-            format: '{value}°C',
-            style: {
-                color: '#c73301'
+    yAxis: [
+        {
+            index: 0,
+            labels: {
+                format: '{value}°C',
+                style: {
+                    color: '#c73301'
+                }
+            },
+            title: {
+                text: 'Teplota',
+                style: {
+                    color: '#c73301'
+                }
             }
-        },
-        title: {
-            text: 'Teplota',
-            style: {
-                color: '#c73301'
+        }, {
+            index: 1,
+            labels: {
+                format: '{value}',
+                style: {
+                    color: '#c73301'
+                }
+            },
+            title: {
+                text: 'Vlhkost půdy',
+                style: {
+                    color: '#c73301'
+                }
             }
         }
-    },
+    ],
     // , {
     //     labels: {
     //         format: '{value}°C',
@@ -68,6 +85,11 @@ Highcharts.chart('graph', {
         data: chartData.out,
         yAxis: 0,
         color: '#0091dc'
+    }, {
+        name: 'Vlhkost půdy',
+        data: chartData.moist,
+        yAxis: 1,
+        color: '#0091dc'
     }],
     tooltip: {
         shared: true,
@@ -79,7 +101,10 @@ Highcharts.chart('graph', {
 
                 s += '<br/><span style="color: #0091dc;">Teplota venku: <b>' +
                     this.points[1].y + '</b></span>';
-            
+
+                s += '<br/><span style="color: #0091dc;">Vlhkost půdy: <b>' +
+                    this.points[2].y + '</b></span>';
+
 
             return s;
         }
