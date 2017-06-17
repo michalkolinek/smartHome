@@ -70,7 +70,7 @@ foreach($items as $item) {
 	$data->categories[] = $item->time;
 	$data->in[] = $item->in ? (float) number_format($item->in, 1) : NULL;
 	$data->out[] = $item->out ? (float) number_format($item->out, 1) : NULL;
-	$data->moist] = $item->moist ? $item->moist : NULL;
+	$data->moist[] = $item->moist ? $item->moist : NULL;
 }
 
 echo '<h2>Posledních 7 dní</h2>';
