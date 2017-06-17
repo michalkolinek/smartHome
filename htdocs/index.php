@@ -3,10 +3,10 @@
 require_once('./app/model/Connection.php');
 require_once('./app/model/Templog.php');
 require_once('./app/model/Battery.php');
+require_once('./app/model/Box.php');
 require_once('./app/model/SQL.php');
 
 $conn = Connection::getConnection();
-
 
 include('header.html');
 
@@ -23,30 +23,12 @@ $in = $conn->query($sql)->fetchObject();
 echo '<section class="clearfix">';
 echo '<h2>Aktuální hodnoty</h2>';
 
-$sql = 'SELECT n.id, n.title FROM node n WHERE enabled = 1 ORDER BY priority';
-$nodes = SQL::toArray($sql);
-$log = new Templog();
-$battery = new Battery();
+$sql = 'SELECT id FROM `box` WHERE enabled = 1 ORDER BY priority';
+$boxes = SQL::toValues($sql);
 
-foreach($nodes as $node) {
-	$temp = number_format($log->getLastValue($node->id, 'temperature'), 1);
-	$hum = number_format($log->getLastValue($node->id, 'humidity'), 1);
-	$moist = number_format($log->getLastValue($node->id, 'moisture'), 1);
-	$updated = SQL::toScalar('SELECT MAX(date) FROM templog WHERE node = '.$node->id);
-	echo '<div class="location box">';
-	echo '<h3>'.$node->title.'</h3>';
-	echo '<div class="info">';
-	echo '<span class="item updated" title="naposledy aktualizováno '.date('G:i j.n.Y', strtotime($updated)).'">'.date('G:i', strtotime($updated)).' <span class="icon-time"></span></span>';
-	echo $battery->getStatusIcon($node->id);
-	echo '</div>';
-	echo '<div class="actual clearfix">';
-	echo '<div class="temp big"><span class="icon-temp-3"></span>'.$temp.'°C</div>';
-	echo '<div class="hum big"><span class="icon-humidity"></span>'.$hum.'%</div>';
-	if(!empty($moist)) {
-		echo '<div class="moist big"><span class="icon-moisture"></span>'.$moist.'</div>';
-	}
-	echo '</div>';
-	echo '</div>';
+foreach($boxes as $id) {
+	$box = new Box($id);
+	echo $box->render();
 }
 
 echo '</section>';
@@ -70,7 +52,7 @@ foreach($items as $item) {
 	$data->categories[] = $item->time;
 	$data->in[] = $item->in ? (float) number_format($item->in, 1) : NULL;
 	$data->out[] = $item->out ? (float) number_format($item->out, 1) : NULL;
-	$data->moist[] = $item->moist ? $item->moist : NULL;
+	$data->moist[] = $item->moist ? round($item->moist) : NULL;
 }
 
 echo '<h2>Posledních 7 dní</h2>';

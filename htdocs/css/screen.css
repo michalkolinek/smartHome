@@ -151,7 +151,7 @@ td {
 	margin-right: 12px;
 }
 
-.actual > div.temp {
+.actual > div:first-of-type {
 	margin-right: 20px;
 }
 
@@ -211,7 +211,7 @@ td {
 	color: #c73301;
 	opacity: 1;
 	-webkit-animation: pulsate 1s ease-out;
-    -webkit-animation-iteration-count: infinite; 
+    -webkit-animation-iteration-count: infinite;
 }
 
 .location .info .item:hover,

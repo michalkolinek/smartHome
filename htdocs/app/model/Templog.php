@@ -39,7 +39,7 @@ class Templog
 				$processed[] = (object) [
 					'time' => strtotime($item->date),
 					'in' => $countIn ? $sumIn / $countIn : NULL,
-					'out' => $countOut ? $sumOut / $countOut : NULL
+					'out' => $countOut ? $sumOut / $countOut : NULL,
 					'moist' => $countMoist ? $sumMoist / $countMoist : NULL
 				];
 				$start = strtotime($item->date);
