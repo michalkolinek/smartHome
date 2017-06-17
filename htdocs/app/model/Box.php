@@ -54,11 +54,12 @@ class Box
 
 		foreach($this->config->metrics as $metric) {
 			$avgCount = isset($metric->avgCount) ? $metric->avgCount : 3;
-			$val = number_format($log->getLastValue($metric->node, $metric->column, $avgCount), 1);
 
 			if($metric->type == self::METRIC_TYPE_BOOL) {
+				$val = (int) $log->getLastValue($metric->node, $metric->column, $avgCount);
 				$formatedVal = ($val ? 'ON' : 'OFF');
 			} else {
+				$val = number_format($log->getLastValue($metric->node, $metric->column, $avgCount), 1);
 				$formatedVal = $val.self::$units[$metric->column];
 			}
 			echo '<div class="'.self::$cssClasses[$metric->column].' big"><span class="'.self::$icons[$metric->column].'"></span>'.$formatedVal.'</div>';
