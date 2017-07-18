@@ -63,7 +63,7 @@ class Templog
 		foreach($data as $i => $item) {
 			$h = date('H', $item->time);
 
-			if(!isset($moment['from']) && ($h >= 17 || $h <= 5)) {
+			if(!isset($moment['from']) && ($h >= 20 || $h <= 5)) {
 				$moment['from'] = $i;
 			}
 
