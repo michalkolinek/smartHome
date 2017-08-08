@@ -7,7 +7,7 @@ $connection = new PDO($dns, 'root', '0i549bmK');
 $params = explode(',', $argv[1]);
 
 $nodeId = $params[0];
-$voltage = $params[1];
+$voltage = $params[1] === '0' ? 'NULL' : $params[1];
 $temperature = $params[2] ? $params[2] : 'NULL';
 $humidity = $params[3] ? $params[3] : 'NULL';
 $moisture = $params[4] ? $params[4] : 'NULL';
@@ -23,4 +23,4 @@ if($result) {
 } else {
   echo "Failed\n";
 }
-exit;
+exit(0);
