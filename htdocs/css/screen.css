@@ -145,6 +145,7 @@ td {
 	border: solid 1px;
 	border-radius: 3px;
 	float: left;
+	box-sizing: border-box;
 }
 
 .actual > div [class*=icon] {
@@ -164,10 +165,20 @@ td {
 	color: #888;
 }
 
+.live-values {
+	display: flex;
+	align-content: flex-start;
+	justify-content: flex-start;
+	flex-wrap: wrap;
+}
+
 .box {
 	padding: 15px 20px 20px 20px;
 	border-radius: 4px;
 	background: #FFF;
+	flex-grow: 0;
+	min-width: 320px;
+	box-sizing: border-box;
 }
 
 .box.location h3 {
@@ -229,15 +240,19 @@ td {
 	}
 
 	.box {
-		margin-bottom: 20px;
-	}
-
-	.actual > div {
+		margin: 0 0 15px 0;
+		min-width: 0;
 		width: 100%;
 	}
 
-	.actual > div.temp {
-		margin-bottom: 15px;
+	.actual > div.big {
+		font-size: 28px;
+		width: 48%;
+		margin-right: 4%;
+	}
+
+	.actual > div.big:nth-child(2) {
+		margin-right: 0;
 	}
 }
 

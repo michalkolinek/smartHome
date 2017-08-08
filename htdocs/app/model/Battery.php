@@ -41,14 +41,17 @@ class Battery
 
 	public function getStatusIcon($nodeId)
 	{
-			$state = $this->getState($nodeId);
-			$supplyV = number_format($state->value, 2);
-
+		$state = $this->getState($nodeId);
+		$supplyV = number_format($state->value, 2);
+		if(empty($supplyV)) {
+			return '';
+		} else {
 			$info = 'Napětí '.$supplyV.'V, '.$state->info;
 			$html = '<span class="item battery-status'.($state->level == 'low' ? ' critical' : '').'" title="'.$info.'">'.$supplyV.'V <span class="'.$state->icon.'"></span>
 			</span>';
 
 			return $html;
+		}
 	}
 
 	public function getLastValue($nodeId, $countToAvg = 3)

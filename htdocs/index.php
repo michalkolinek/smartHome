@@ -22,6 +22,7 @@ $in = $conn->query($sql)->fetchObject();
 
 echo '<section class="clearfix">';
 echo '<h2>Aktuální hodnoty</h2>';
+echo '<div class="live-values">';
 
 $sql = 'SELECT id FROM `box` WHERE enabled = 1 ORDER BY priority';
 $boxes = SQL::toValues($sql);
@@ -31,6 +32,7 @@ foreach($boxes as $id) {
 	echo $box->render();
 }
 
+echo '</div>';
 echo '</section>';
 
 
