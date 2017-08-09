@@ -1,6 +1,8 @@
 
 moment.locale('cs');
 
+var isPhone = document.body.clientWidth < 400;
+
 Highcharts.chart('graph', {
     chart: {
         type: 'spline',
@@ -35,7 +37,8 @@ Highcharts.chart('graph', {
                 style: {
                     color: '#c73301'
                 }
-            }
+            },
+            visible: !isPhone
         }, {
             index: 1,
             labels: {
@@ -49,7 +52,8 @@ Highcharts.chart('graph', {
                 style: {
                     color: '#333E4A'
                 }
-            }
+            },
+            visible: !isPhone
         }
     ],
     // , {
