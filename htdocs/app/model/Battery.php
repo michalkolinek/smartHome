@@ -43,7 +43,7 @@ class Battery
 	{
 		$state = $this->getState($nodeId);
 		$supplyV = number_format($state->value, 2);
-		if(empty($supplyV)) {
+		if(empty($supplyV) || $supplyV == 0) {
 			return '';
 		} else {
 			$info = 'Napětí '.$supplyV.'V, '.$state->info;
