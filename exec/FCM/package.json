@@ -1,0 +1,7 @@
+{
+  "name": "NativeApp3",
+  "dependencies": {
+    "fcm-node": "^1.2.1",
+    "fcm-push": "^1.1.3"
+  }
+}

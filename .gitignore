@@ -1,3 +1,6 @@
+node_modules
 *.log
 *.sublime-project
 *.sublime-workspace
+.accesstoken
+db.php

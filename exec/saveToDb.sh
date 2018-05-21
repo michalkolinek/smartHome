@@ -1,8 +1,10 @@
 #!/usr/bin/php
 <?php
 
-$dns = 'mysql:host=localhost;dbname=SmartHome;charset=utf8';
-$connection = new PDO($dns, 'root', '0i549bmK');
+include('db.php');
+
+//$dns = 'mysql:host=localhost;dbname=SmartHome;charset=utf8';
+//$connection = new PDO($dns, 'root', '0i549bmK');
 
 $params = explode(',', $argv[1]);
 
