@@ -11,7 +11,7 @@ $temperature = $params[2] ? $params[2] : 'NULL';
 $humidity = $params[3] ? $params[3] : 'NULL';
 $moisture = $params[4] ? $params[4] : 'NULL';
 $output = $params[5] || $params[5] === '0' ? $params[5] : 'NULL';
-$pressure = $params[6] || $params[6] === '0' ? $params[6] : 'NULL';
+$pressure = $params[9] || $params[9] === '0' ? $params[9] : 'NULL';
 $date = date('Y-m-d H:i:s');
 
 $sql = 'INSERT INTO templog(node, date, temperature, humidity, moisture, pressure, output, voltage)
