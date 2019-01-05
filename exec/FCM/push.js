@@ -6,7 +6,8 @@ const fcm = new FCM(serverKey);
 const devices = [
     'c_PfoKvw0xM:APA91bH48R0MTbtKUd_6ObDOnh8C70tiANYvpSsdWvG11hIAQGz-iX1c0E2GcYirpsOYwRsbTpYJJ2H9EYgR9dl70uJmmXoL9Km_srvWdpQbKNkp3CFhoQxkH-ggrrqUhEhIQ66_RIIZ',
     'fm6oxv3Dg-g:APA91bFA8I5pdwXw4wD7pjZm6OJOQuIDDrdllyApvriDPhKP9OTm8S6SMC-ptwtrB-WvKWePUSorkUUYr5UKptd-cBeMVPMRdvSPLz-iZRhOCwSIJt-2-ANpD001cTTCijwzxiZLkUWc',        
-    'fhIGLhQHG68:APA91bGmQc60csKDbKDxQ5xcBS1DS4Cqs02PHsWsPph6U1ss70F-9Fk7JYXwbTCxsZhDIolIblB2lY_X4G9CdHazuvGVJL3k-Zg8iEGaCyC-iKSS3XhrIadwroS87SrtL6m-yszVx8td'
+    'fhIGLhQHG68:APA91bGmQc60csKDbKDxQ5xcBS1DS4Cqs02PHsWsPph6U1ss70F-9Fk7JYXwbTCxsZhDIolIblB2lY_X4G9CdHazuvGVJL3k-Zg8iEGaCyC-iKSS3XhrIadwroS87SrtL6m-yszVx8td',
+    'dhxgsl1yCRY:APA91bEt1B-u9INLruoJxgb052-zaTgjVW3G5ORGO-s5XrKTWBvsfFDAgVR6i8jmbvsD2PEpFWdGR1AF8aOp4d12uJeCcmuZIX1UFAleR1teOJ_z5JMxoHy6P5HgQjsiRUY4QzA0fpQ3EZ0EPC1ilUjJTtXIibredw'
 ];
 
 devices.forEach((to) => {
