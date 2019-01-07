@@ -104,7 +104,7 @@ def readBME280Pressure(addr=DEVICE):
   #Refine temperature
   var1 = ((((temp_raw>>3)-(dig_T1<<1)))*(dig_T2)) >> 11
   var2 = (((((temp_raw>>4) - (dig_T1)) * ((temp_raw>>4) - (dig_T1))) >> 12) * (dig_T3)) >> 14
-  t_fine = var1+var2
+  t_fine = var1+var2-20
 
   # Refine pressure and adjust for temperature
   var1 = t_fine / 2.0 - 64000.0
@@ -121,8 +121,8 @@ def readBME280Pressure(addr=DEVICE):
     var1 = dig_P9 * pressure * pressure / 2147483648.0
     var2 = pressure * dig_P8 / 32768.0
     pressure = pressure + (var1 + var2 + dig_P7) / 16.0
-
-  return pressure/100.0
+    p0 = (pressure / 100.0) / pow(1 - 380.0 / 44330.0, 5.255)
+  return p0
 
 
 # setup
