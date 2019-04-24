@@ -1,5 +1,4 @@
 <?php
-
 require_once('./app/model/Connection.php');
 require_once('./app/model/Templog.php');
 require_once('./app/model/Battery.php');
