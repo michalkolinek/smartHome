@@ -94,35 +94,38 @@ def readBME280Pressure(addr=DEVICE):
 
   # Wait in ms (Datasheet Appendix B: Measurement time and current calculation)
   wait_time = 1.25 + (2.3 * OVERSAMPLE_TEMP) + ((2.3 * OVERSAMPLE_PRES) + 0.575) + ((2.3 * OVERSAMPLE_HUM)+0.575)
-  time.sleep(wait_time/1000)  # Wait the required time  
+  time.sleep(wait_time/1000)  # Wait the required time
 
   # Read temperature/pressure/humidity
   data = bus.read_i2c_block_data(addr, REG_DATA, 8)
   pres_raw = (data[0] << 12) | (data[1] << 4) | (data[2] >> 4)
-  temp_raw = (data[3] << 12) | (data[4] << 4) | (data[5] >> 4)
 
-  #Refine temperature
-  var1 = ((((temp_raw>>3)-(dig_T1<<1)))*(dig_T2)) >> 11
-  var2 = (((((temp_raw>>4) - (dig_T1)) * ((temp_raw>>4) - (dig_T1))) >> 12) * (dig_T3)) >> 14
-  t_fine = var1+var2
+  return pres_raw;
 
-  # Refine pressure and adjust for temperature
-  var1 = t_fine / 2.0 - 64000.0
-  var2 = var1 * var1 * dig_P6 / 32768.0
-  var2 = var2 + var1 * dig_P5 * 2.0
-  var2 = var2 / 4.0 + dig_P4 * 65536.0
-  var1 = (dig_P3 * var1 * var1 / 524288.0 + dig_P2 * var1) / 524288.0
-  var1 = (1.0 + var1 / 32768.0) * dig_P1
-  if var1 == 0:
-    pressure=0
-  else:
-    pressure = 1048576.0 - pres_raw
-    pressure = ((pressure - var2 / 4096.0) * 6250.0) / var1
-    var1 = dig_P9 * pressure * pressure / 2147483648.0
-    var2 = pressure * dig_P8 / 32768.0
-    pressure = pressure + (var1 + var2 + dig_P7) / 16.0
+  # temp_raw = (data[3] << 12) | (data[4] << 4) | (data[5] >> 4)
 
-  return pressure/100.0
+  # #Refine temperature
+  # var1 = ((((temp_raw>>3)-(dig_T1<<1)))*(dig_T2)) >> 11
+  # var2 = (((((temp_raw>>4) - (dig_T1)) * ((temp_raw>>4) - (dig_T1))) >> 12) * (dig_T3)) >> 14
+  # t_fine = var1+var2
+
+  # # Refine pressure and adjust for temperature
+  # var1 = t_fine / 2.0 - 64000.0
+  # var2 = var1 * var1 * dig_P6 / 32768.0
+  # var2 = var2 + var1 * dig_P5 * 2.0
+  # var2 = var2 / 4.0 + dig_P4 * 65536.0
+  # var1 = (dig_P3 * var1 * var1 / 524288.0 + dig_P2 * var1) / 524288.0
+  # var1 = (1.0 + var1 / 32768.0) * dig_P1
+  # if var1 == 0:
+  #   pressure=0
+  # else:
+  #   pressure = 1048576.0 - pres_raw
+  #   pressure = ((pressure - var2 / 4096.0) * 6250.0) / var1
+  #   var1 = dig_P9 * pressure * pressure / 2147483648.0
+  #   var2 = pressure * dig_P8 / 32768.0
+  #   pressure = pressure + (var1 + var2 + dig_P7) / 16.0
+
+  # return pressure/100.0
 
 
 # setup
@@ -137,14 +140,14 @@ GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(powerPin, GPIO.OUT)
 
-# read data 
+# read data
 GPIO.output(powerPin, 1)
 
 while True:
     time.sleep(0.1)
     result = instance.read()
     if result.is_valid():
-	break
+	    break
 
 GPIO.output(powerPin, 0)
 
