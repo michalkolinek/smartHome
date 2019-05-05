@@ -11,9 +11,27 @@ $result = $connection->query($sql);
 
 if($result) {
 	$value = $result->fetch(PDO::FETCH_OBJ);
-	$waterColumn = ($value->impulses / 2) * $impulsVolume;
-  	echo $waterColumn;
+	$lastHour = ($value->impulses / 2) * $impulsVolume;
 } else {
   	echo "Failed\n";
+  	exit(1);
 }
+
+$sql = 'SELECT SUM(waterImpuls) as impulses FROM templog WHERE node = '.$nodeId.' AND date >= SUBDATE(CURTIME(), INTERVAL 1 DAY)';
+$result = $connection->query($sql);
+
+if($result) {
+	$value = $result->fetch(PDO::FETCH_OBJ);
+	$lastDay = ($value->impulses / 2) * $impulsVolume;
+} else {
+  	echo "Failed\n";
+  	exit(1);
+}
+
+$data = new StdClass();
+$data->hour = $lastHour;
+$data->day = $lastDay;
+
+echo json_encode($data);
+
 exit(0);
