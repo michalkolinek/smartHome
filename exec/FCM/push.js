@@ -4,10 +4,8 @@ const serverKey = 'AAAAMEnbPZQ:APA91bH0dcr1PS5-RBMDQLWhq-2pj0znhfF1VIk5Ya789Ll6Q
 
 const fcm = new FCM(serverKey);
 const devices = [
-    'c_PfoKvw0xM:APA91bH48R0MTbtKUd_6ObDOnh8C70tiANYvpSsdWvG11hIAQGz-iX1c0E2GcYirpsOYwRsbTpYJJ2H9EYgR9dl70uJmmXoL9Km_srvWdpQbKNkp3CFhoQxkH-ggrrqUhEhIQ66_RIIZ',
-    'fm6oxv3Dg-g:APA91bFA8I5pdwXw4wD7pjZm6OJOQuIDDrdllyApvriDPhKP9OTm8S6SMC-ptwtrB-WvKWePUSorkUUYr5UKptd-cBeMVPMRdvSPLz-iZRhOCwSIJt-2-ANpD001cTTCijwzxiZLkUWc',        
-    'fhIGLhQHG68:APA91bGmQc60csKDbKDxQ5xcBS1DS4Cqs02PHsWsPph6U1ss70F-9Fk7JYXwbTCxsZhDIolIblB2lY_X4G9CdHazuvGVJL3k-Zg8iEGaCyC-iKSS3XhrIadwroS87SrtL6m-yszVx8td',
-    'dhxgsl1yCRY:APA91bEt1B-u9INLruoJxgb052-zaTgjVW3G5ORGO-s5XrKTWBvsfFDAgVR6i8jmbvsD2PEpFWdGR1AF8aOp4d12uJeCcmuZIX1UFAleR1teOJ_z5JMxoHy6P5HgQjsiRUY4QzA0fpQ3EZ0EPC1ilUjJTtXIibredw'
+    'cJ6NTo788bM:APA91bEFfPvoBjlZpSqm6SBCogtCTcn8mKDkYVJCfVPfRkV5NhH_XSna3pEAJHsLK4hM6Cknjb8LzevsSRl2SzWlVjUUyTn2to7JxIl1U28JQNVcb7n-rOQKhOXUgrpCrCyMeSe9YFnK',
+    'dOX3S5-diWc:APA91bHz1k4-HayH1C-IVnIkCSHZzT2a4fmXFMeYhlmtkSLtSeGPujzum52Bh7X2PpGybNxpz5J6GysBctae5kU3Z5Ww__2UvofRcw4hrDnCE-NuC5t84Xw8r65mseCHQwxmP9-dMMlX'
 ];
 
 devices.forEach((to) => {
@@ -16,7 +14,7 @@ devices.forEach((to) => {
 	notification: {
 	    tag: 'wash',
 	    title: 'Pračka doprala!',
-	    body: 'Má paní, tvé prádlo je čisté.',
+	    body: 'Má paní, Tvé prádlo je čisté.',
 	    sound: 'default',
 	}
     };
