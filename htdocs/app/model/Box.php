@@ -15,6 +15,8 @@ class Box
 		'humidity' => 'icon-humidity',
 		'moisture' => 'icon-water',
 		'output' => 'icon-power-plug',
+		'light' => 'icon-light',
+		'pump' => 'icon-droplet',
 	];
 
 	public static $cssClasses = [
@@ -22,6 +24,8 @@ class Box
 		'humidity' => 'hum',
 		'moisture' => 'moist',
 		'output' => 'output',
+		'light' => 'output',
+		'pump' => 'output',
 	];
 
 	public static $units = [
