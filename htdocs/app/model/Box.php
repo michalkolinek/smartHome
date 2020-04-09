@@ -72,8 +72,7 @@ class Box
 				$val = (int) $log->getLastValue($metric->node, $metric->column, $avgCount);
 				$formatedVal = ($val ? 'ON' : 'OFF');
 			} else {
-				if($metric->column == 'windAvg' || $metric->column == 'windMax') {
-					$metric->column = 'wind';
+				if($metric->column == 'wind') {
 					$avg = number_format($log->getLastValue($metric->node, 'windAvg', $avgCount), 1);
 					$max = number_format($log->getLastValue($metric->node, 'windMax', $avgCount), 1);
 					$formatedVal = $avg.self::$units['wind'].' / '.$max.self::$units['wind'];
