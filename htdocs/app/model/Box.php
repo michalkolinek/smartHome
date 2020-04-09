@@ -17,6 +17,9 @@ class Box
 		'output' => 'icon-power-plug',
 		'light' => 'icon-light',
 		'pump' => 'icon-droplet',
+		'wind' => 'icon-wind',
+		'waterImpuls' => 'icon-water',
+		'pressure' => '',
 	];
 
 	public static $cssClasses = [
@@ -26,6 +29,9 @@ class Box
 		'output' => 'output',
 		'light' => 'output',
 		'pump' => 'output',
+		'wind' => 'hum',
+		'waterImpuls' => 'hum',
+		'pressure' => 'hum',
 	];
 
 	public static $units = [
@@ -33,6 +39,9 @@ class Box
 		'humidity' => '%',
 		'moisture' => '',
 		'output' => '',
+		'wind' => 'm/s',
+		'waterImpuls' => 'mm/h',
+		'pressure' => 'hPa',
 	];
 
 	public function __construct($id)
