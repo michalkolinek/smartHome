@@ -15,11 +15,11 @@ class Box
 		'humidity' => 'icon-humidity',
 		'moisture' => 'icon-water',
 		'output' => 'icon-power-plug',
-		'light' => 'icon-light',
+		'light' => 'icon-sun-1',
 		'pump' => 'icon-droplet',
 		'wind' => 'icon-wind',
 		'waterImpuls' => 'icon-rain',
-		'pressure' => '',
+		'pressure' => 'icon-pressure',
 	];
 
 	public static $cssClasses = [
