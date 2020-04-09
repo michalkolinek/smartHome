@@ -18,7 +18,7 @@ class Box
 		'light' => 'icon-light',
 		'pump' => 'icon-droplet',
 		'wind' => 'icon-wind',
-		'waterImpuls' => 'icon-water',
+		'waterImpuls' => 'icon-rain',
 		'pressure' => '',
 	];
 
